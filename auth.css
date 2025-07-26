@@ -1,0 +1,245 @@
+<<<<<<< HEAD
+/* auth.css */
+
+/* Authentication Modal Styles */
+.auth-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1001; /* Sit on top of everything */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #1e1e1e; /* Darker grey */
+    margin: auto;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    text-align: center;
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: white;
+    text-decoration: none;
+}
+
+.auth-form h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #1DB954; /* Spotify green */
+    font-size: 1.8em;
+}
+
+.auth-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="password"] {
+    padding: 13px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background-color: #282828;
+    color: white;
+    font-size: 1em;
+}
+
+.auth-form input[type="text"]::placeholder,
+.auth-form input[type="password"]::placeholder {
+    color: #b3b3b3;
+}
+
+.auth-form .btn {
+    padding: 12px 20px;
+    background-color: #1DB954; /* Spotify green */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.auth-form .btn:hover {
+    background-color: #1ed760; /* Lighter green on hover */
+}
+
+.auth-form p {
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #b3b3b3;
+}
+
+.auth-form p a {
+    color: #1DB954;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.auth-form p a:hover {
+    text-decoration: underline;
+}
+
+.auth-message-display {
+    display: none; /* Hidden by default */
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: white; /* Default text color, overridden by JS */
+}
+
+.logged-in-message {
+    color: white;
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: xx-large;
+}
+=======
+/* auth.css */
+
+/* Authentication Modal Styles */
+.auth-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1001; /* Sit on top of everything */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #1e1e1e; /* Darker grey */
+    margin: auto;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    text-align: center;
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: white;
+    text-decoration: none;
+}
+
+.auth-form h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #1DB954; /* Spotify green */
+    font-size: 1.8em;
+}
+
+.auth-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="password"] {
+    padding: 13px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background-color: #282828;
+    color: white;
+    font-size: 1em;
+}
+
+.auth-form input[type="text"]::placeholder,
+.auth-form input[type="password"]::placeholder {
+    color: #b3b3b3;
+}
+
+.auth-form .btn {
+    padding: 12px 20px;
+    background-color: #1DB954; /* Spotify green */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.auth-form .btn:hover {
+    background-color: #1ed760; /* Lighter green on hover */
+}
+
+.auth-form p {
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #b3b3b3;
+}
+
+.auth-form p a {
+    color: #1DB954;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.auth-form p a:hover {
+    text-decoration: underline;
+}
+
+.auth-message-display {
+    display: none; /* Hidden by default */
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: white; /* Default text color, overridden by JS */
+}
+
+.logged-in-message {
+    color: white;
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: xx-large;
+}
+>>>>>>> 42daecc (COMMIT ALL FILES TO GITHUB)

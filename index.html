@@ -1,0 +1,1126 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css">
+    <!-- Assuming utility.css and auth.css are separate and correctly linked -->
+    <link rel="stylesheet" href="utility.css">
+    <link rel="stylesheet" href="auth.css">
+    <title>Melody Maker - Web Player: Music for everyone</title>
+</head>
+
+<body>
+    <div class="container flex bg-black">
+        <div class="left">
+            <div class="home bg-grey rounded m-1 p-1">
+                <div class="logo">
+                    <!-- Ensure 'logo melody.jpg' exists in your img folder -->
+                    <img src="logo melody.jpg" alt="Melody Maker Logo">
+                </div>
+                <ul>
+                    <li id="homeLink"><img class="invert" src="img/home.svg" alt="home icon">Home</li>
+                    <li id="searchLink"><img class="invert" src="img/search.svg" alt="search icon">Search</li>
+                </ul>
+            </div>
+
+            <div class="library bg-grey rounded m-1 p-1">
+                <div class="library-content">
+                    <!-- The back button container is already here and will be controlled by JS -->
+                    <div id="backButtonContainer" style="display: none; padding: 10px;">
+                        <button id="backToPlaylistsBtn" class="btn btn-secondary"
+                            style="width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; background-color: #333; color: white; border: 1px solid #555;">
+                            &larr; Back to Playlists
+                        </button>
+                    </div>
+
+                    <div class="songList">
+                        <div class="heading">
+                            <img class="invert" src="img/playlist.svg" alt="playlist icon">
+                            <h2 id="currentPlaylistTitle">Current Playlist</h2>
+                        </div>
+                        <!-- This container MUST exist for the scrollbar and UL -->
+                        <div id="songItemsContainer" class="song-items-container" style="display: block;">
+                            <ul>
+                                <!-- Songs will be injected here by JavaScript -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="heading">
+                        <img class="invert" src="img/playlist.svg" alt="playlist icon">
+                        <h2>Your Library</h2>
+                    </div>
+
+                    <div class="library-content">
+                        <div class="create-playlist-card bg-light-grey rounded p-1">
+                            <h3>Create your first playlist</h3>
+                            <p>It's easy, we'll help you</p>
+                            <button id="createPlaylistBtn" class="btn-create-playlist rounded ">
+                                <img src="img/plus.svg" alt="Plus icon"
+                                    style="width: 20px; height: 20px; margin-right: 5px;">
+                                Create playlist
+                            </button>
+                            <button id="viewPlaylistsBtn" class="btn-create-playlist rounded" style="margin-top: 10px;">
+                                <img src="img/playlist.svg" alt="View Playlists icon"
+                                    style="width: 20px; height: 20px; margin-right: 5px; filter: invert(1);">
+                                View Playlists
+                            </button>
+                        </div>
+
+                        <div class="create-playlist-card bg-light-grey rounded p-1" style="margin-top: 10px;">
+                            <h3>Liked Songs</h3>
+                            <p>Songs you've liked</p>
+                            <button id="viewLikedBtn" class="btn-create-playlist rounded">
+                                <img src="img/liked.svg" alt="Liked Songs icon"
+                                    style="width: 20px; height: 20px; margin-right: 5px;">
+                                View Liked
+                            </button>
+                        </div>
+
+                        <div class="create-playlist-card bg-light-grey rounded p-1" style="margin-top: 10px;">
+                            <h3>Recently Played</h3>
+                            <p>Your listening history</p>
+                            <button id="viewRecentBtn" class="btn-create-playlist rounded">
+                                <img src="img/recent.svg" alt="Recently Played icon"
+                                    style="width: 20px; height: 20px; margin-right: 5px;">
+                                View History
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <div><a href="https://www.spotify.com/jp/legal/"><span>Legal</span></a></div>
+                <div><a href="https://www.spotify.com/jp/privacy/"><span>Privacy Center</span></a></div>
+                <div><a href="https://www.spotify.com/jp/legal/privacy-policy/"><span>Privacy Policy</span></a></div>
+                <div><a href="https://www.spotify.com/jp/legal/cookies-policy/"><span>Cookies</span></a></div>
+                <div><a href="https://www.spotify.com/jp/legal/privacy-policy/#s3"><span>About Ads</span></a></div>
+                <div><a href="https://www.spotify.com/jp/accessibility/"><span>Accessibility</span></a></div>
+            </div>
+        </div>
+
+        <div class="right bg-grey rounded m-1 p-1">
+            <div class="header">
+                <div class="nav">
+                    <div class="back-forward">
+                        <button class="arrow-btn" id="backBtn"><img src="img/left-arrow.svg" alt="back"></button>
+                        <button class="arrow-btn" id="forwardBtn"><img src="img/right-arrow.svg" alt="forward"></button>
+                        <button id="themeToggleBtn" class="btn-sm" title="Toggle Light/Dark Theme">🌙</button>
+
+                    </div>
+                </div>
+
+                <div class="search-bar-container">
+                    <input type="text" id="searchInput" placeholder="Search for songs or artists...">
+                    <button id="searchButton" class="btn-search rounded">Search</button>
+                </div>
+
+                <div class="buttons">
+                    <button class="signup-btn">Sign up</button>
+                    <button class="login-btn">Log in</button>
+                </div>
+            </div>
+            
+            <div id="mainContentArea" class="main-content-area">
+
+                <div class="spotifySong" id="popularSongsSection"> <!-- Added ID here -->
+                    <h1>Popular Songs</h1>
+                    <div class="cardContainer">
+                        <div class="card" data-folder="Popular Songs/Ishq Hai">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Ishq Hai.jpg" alt="ishq hai">
+                            <h2>Ishq Hai</h2>
+                            <h4>Anurag Saikia</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Leja">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Leja.jpg" alt="Leja">
+                            <h2>Leja</h2>
+                            <h4>Lost Stories , JAI DHIR</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/O Rangrez">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="O Rangrez.jpg" alt="O Rangrez">
+                            <h2>O Rangrez</h2>
+                            <h4>Shankar-Ehsaan-Loy , Shreya Ghoshal</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Shaky">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Shaky.jpg" alt="shaky">
+                            <h2>Shaky</h2>
+                            <h4>Sanju Rathod</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Mera Naam Mary">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Mera Naam Mary.jpg" alt="Mera naam Mary">
+                            <h2>Mera Naam Mary</h2>
+                            <h4>Ajay Atul , Chinmayi</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Rang">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Rang .jpg" alt="Rang">
+                            <h2>Rang</h2>
+                            <h4>Tanishk Bagchi , Satinder Sartaaz</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Ranu Bombay Ki Ranu">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="RANU BOMBAI KI RANU.jpg" alt="Ranu">
+                            <h2>Ranu Bombai Ki Ranu</h2>
+                            <h4>Ramu Rathod , Prabha</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Sooseki">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Sooseki.jpg" alt="sooseki">
+                            <h2>Sooseki</h2>
+                            <h4>Shreya Ghoshal</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Kurchi Madathapetti">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Kurchi Madathapetti.jpg" alt="Kurchi">
+                            <h2>Kurchi Madathapetti</h2>
+                            <h4>Sahithi Chaganti,Sri Krishna</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Laal Peeli Akhiyan">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Laal Peeli Akhiyaan.jpg" alt="laal">
+                            <h2>Laal Peeli Akhiyaan</h2>
+                            <h4>Romy , Tanishk Bagchi</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Tauba Tauba">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Tauba Tauba.jpg" alt="Tauba">
+                            <h2>Tauba Tauba</h2>
+                            <h4>Karan Aujla</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Die With A Smile">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Die With A Smile.jpg" alt="die with a smile">
+                            <h2>Die With A Smile</h2>
+                            <h4>Lady Gaga,Bruno Mars</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Teri Baaton Mein Aisa Uljha Jiya">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Teri Baaton Mein Aisa Uljha Jiya.jpg" alt="Teri">
+                            <h2>Teri Baaton Mein Aisa Uljha Jiya</h2>
+                            <h4>Raghav , Tanishk Bagchi</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Banni">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Banni.jpg" alt="Banni">
+                            <h2>Banni</h2>
+                            <h4>Kapil Jangir , Komal Amrawat</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Chaudhary">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Chaudhary.jpg" alt="Chaudhary">
+                            <h2>Chaudhary</h2>
+                            <h4>Mame Khan</h4>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="spotifyPlaylists" id="popularPlaylistsSection">
+                    <h1>Popular Playlists</h1>
+                    <div class="cardContainer">
+                        <div class="card" data-folder="ALL TIME HITS HINDI">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Songs album.jpg" alt="Songs Album">
+                            <h2>All Time Hits</h2>
+                            <p>From soul-stirring to foot-tapping: It's all here.</p>
+                        </div>
+
+                        <div class="card" data-folder="Telugu Hits">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Telugu Songs album.jpg" alt="Telugu Songs Album">
+                            <h2>Telugu Hits</h2>
+                            <p>Dive into Delight: The Ultimate Telugu Musical Journey.</p>
+                        </div>
+
+                        <div class="card" data-folder="OLD SONGS">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Old Songs ALBUM.jpg" alt="Old Songs Album">
+                            <h2>Old Songs</h2>
+                            <p>Timeless tunes,endless memories.</p>
+                        </div>
+
+                        <div class="card" data-folder="Bollywood Dance Music">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Bollywood Dance.jpg" alt="Bollywood Dance Songs Album">
+                            <h2>Bollywood Dance Music</h2>
+                            <p>Bollywood Beats:Get Ready to move!</p>
+                        </div>
+
+                        <div class="card" data-folder="Bollywood 2000s">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Bollywood 2000s.jpg" alt="Bollywood 2000s Songs Album">
+                            <h2>Bollywood 2000s</h2>
+                            <p>Your Passport to 2000s Bollywood Nostalgia.</p>
+                        </div>
+
+                        <div class="card" data-folder="Insta Hits">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Insta Hits.jpg" alt="Insta Hits Songs Album">
+                            <h2>Insta Hits</h2>
+                            <p>Your feed's favorite sounds, all in one place. Get ready to scroll and bop!</p>
+                        </div>
+
+                        <div class="card" data-folder="Latest Songs">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Latest Songs.jpg" alt="Latest Songs Album">
+                            <h2>Latest Songs</h2>
+                            <p>Fresh off the charts, straight to your speakers. Hear what's hot right now!</p>
+                        </div>
+
+                        <div class="card" data-folder="Bhakti Songs">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Bhakti Songs.jpg" alt="Bhakti Songs Album">
+                            <h2>Bhakti Songs</h2>
+                            <p>Find peace, feel the grace. Immerse yourself in divine melodies.</p>
+                        </div>
+
+                        <div class="card" data-folder="Cartoon">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Cartoon.jpg" alt="Cartoon Songs Album">
+                            <h2>Cartoon Songs </h2>
+                            <p>Sing along to your childhood! All the iconic cartoon hits in one place.</p>
+                        </div>
+
+                        <div class="card" data-folder="Patriotic Songs">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Patriotic.jpg" alt="Patriotic Album">
+                            <h2>Patriotic Songs </h2>
+                            <p>Salute the spirit. Songs that ignite patriotism and inspire the soul.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- Custom Playlists Section -->
+                <div id="userPlaylistsDisplaySection" class="spotifyPlaylists " style="display:grid;">
+                    <h1>Your Custom Playlists</h1>
+                    <div id="userPlaylistsContainer" class="user-playlists-section"></div>
+                </div>
+
+
+            </div> <!-- main content area -->
+
+
+            <div class="playbar">
+                <div class="seekbar">
+                    <div class="circle"></div>
+                </div>
+                <div class="visualizer">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+
+                <div class="abovebar">
+                    <div class="songinfo"></div>
+                    <div class="songbuttons">
+                        <img width="35" id="previous" src="img/prevsong.svg" alt="Previous Song">
+                        <img width="35" id="play" src="img/play.svg" alt="Play/Pause">
+                        <img width="35" id="next" src="img/nextsong.svg" alt="Next Song">
+                        <img id="likeSongBtn" class="like-button" src="img/heart.svg" alt="Like" />
+
+                    </div>
+                    <div class="timevol">
+                        <div class="songtime"></div>
+                        <div class="volume">
+                            <img width="25" src="img/volume.svg" alt="Volume Icon">
+                            <div class="range">
+                                <input type="range" name="volume" id="volumeControl" min="0" max="100" value="50">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- right tag -->
+    </div> <!-- container tag -->
+
+    <!-- Authentication Modal - Directly embedded for consistent loading -->
+    <div id="authModal" class="auth-modal">
+        <div class="modal-content">
+            <span id="closeAuthModalBtn" class="close-button">&times;</span>
+            <div class="auth-form">
+                <h2 id="authModalTitle">Login</h2>
+                <form id="authForm" autocomplete="off">
+                    <input type="text" id="usernameInput" placeholder="Username" autocomplete="off" required />
+                    <input type="password" id="passwordInput" placeholder="Password" autocomplete="off" required />
+                    <button type="submit" class="btn" id="authSubmitBtn">Login</button>
+                </form>
+                <div class="auth-message-display" id="authMessageDisplay"></div>
+                <p id="authToggleText">
+                    Don't have an account? <a href="#" id="switchToSignup">Signup</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Modal for Create Playlist and other dialogs -->
+    <div id="customModal" class="modal hidden">
+        <div class="modal-content">
+            <span id="closeModalBtn" class="close-button">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <div id="modalMessage"></div>
+            <div id="modalInputContainer" style="display:none;">
+                <input id="modalInput" type="text" placeholder="Enter playlist name..." />
+            </div>
+            <div id="modalButtons"></div>
+        </div>
+    </div>
+    <div id="customModalBackdrop" class="modal-backdrop hidden"></div>
+
+
+    <!-- Feature-specific JS files (IMPORTANT: Load these BEFORE main.js as main.js imports from them) -->
+    <script src="recentlyPlayed.js" type="module"></script>
+    <script src="likedSongs.js" type="module"></script>
+    <script src="playlistManager.js" type="module"></script>
+
+    <!-- Core application logic -->
+    <script src="main.js" type="module"></script>
+
+    <!-- Authentication logic (can be loaded after core app, as it doesn't have direct imports into main.js) -->
+
+    <script src="auth.js" type="module"></script>
+
+</body>
+
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css">
+    <!-- Assuming utility.css and auth.css are separate and correctly linked -->
+    <link rel="stylesheet" href="utility.css">
+    <link rel="stylesheet" href="auth.css">
+    <title>Melody Maker - Web Player: Music for everyone</title>
+</head>
+
+<body>
+    <div class="container flex bg-black">
+        <div class="left">
+            <div class="home bg-grey rounded m-1 p-1">
+                <div class="logo">
+                    <!-- Ensure 'logo melody.jpg' exists in your img folder -->
+                    <img src="logo melody.jpg" alt="Melody Maker Logo">
+                </div>
+                <ul>
+                    <li id="homeLink"><img class="invert" src="img/home.svg" alt="home icon">Home</li>
+                    <li id="searchLink"><img class="invert" src="img/search.svg" alt="search icon">Search</li>
+                </ul>
+            </div>
+
+            <div class="library bg-grey rounded m-1 p-1">
+                <div class="library-content">
+                    <!-- The back button container is already here and will be controlled by JS -->
+                    <div id="backButtonContainer" style="display: none; padding: 10px;">
+                        <button id="backToPlaylistsBtn" class="btn btn-secondary"
+                            style="width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; background-color: #333; color: white; border: 1px solid #555;">
+                            &larr; Back to Playlists
+                        </button>
+                    </div>
+
+                    <div class="songList">
+                        <div class="heading">
+                            <img class="invert" src="img/playlist.svg" alt="playlist icon">
+                            <h2 id="currentPlaylistTitle">Current Playlist</h2>
+                        </div>
+                        <!-- This container MUST exist for the scrollbar and UL -->
+                        <div id="songItemsContainer" class="song-items-container" style="display: block;">
+                            <ul>
+                                <!-- Songs will be injected here by JavaScript -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="heading">
+                        <img class="invert" src="img/playlist.svg" alt="playlist icon">
+                        <h2>Your Library</h2>
+                    </div>
+
+                    <div class="library-content">
+                        <div class="create-playlist-card bg-light-grey rounded p-1">
+                            <h3>Create your first playlist</h3>
+                            <p>It's easy, we'll help you</p>
+                            <button id="createPlaylistBtn" class="btn-create-playlist rounded ">
+                                <img src="img/plus.svg" alt="Plus icon"
+                                    style="width: 20px; height: 20px; margin-right: 5px;">
+                                Create playlist
+                            </button>
+                            <button id="viewPlaylistsBtn" class="btn-create-playlist rounded" style="margin-top: 10px;">
+                                <img src="img/playlist.svg" alt="View Playlists icon"
+                                    style="width: 20px; height: 20px; margin-right: 5px; filter: invert(1);">
+                                View Playlists
+                            </button>
+                        </div>
+
+                        <div class="create-playlist-card bg-light-grey rounded p-1" style="margin-top: 10px;">
+                            <h3>Liked Songs</h3>
+                            <p>Songs you've liked</p>
+                            <button id="viewLikedBtn" class="btn-create-playlist rounded">
+                                <img src="img/liked.svg" alt="Liked Songs icon"
+                                    style="width: 20px; height: 20px; margin-right: 5px;">
+                                View Liked
+                            </button>
+                        </div>
+
+                        <div class="create-playlist-card bg-light-grey rounded p-1" style="margin-top: 10px;">
+                            <h3>Recently Played</h3>
+                            <p>Your listening history</p>
+                            <button id="viewRecentBtn" class="btn-create-playlist rounded">
+                                <img src="img/recent.svg" alt="Recently Played icon"
+                                    style="width: 20px; height: 20px; margin-right: 5px;">
+                                View History
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <div><a href="https://www.spotify.com/jp/legal/"><span>Legal</span></a></div>
+                <div><a href="https://www.spotify.com/jp/privacy/"><span>Privacy Center</span></a></div>
+                <div><a href="https://www.spotify.com/jp/legal/privacy-policy/"><span>Privacy Policy</span></a></div>
+                <div><a href="https://www.spotify.com/jp/legal/cookies-policy/"><span>Cookies</span></a></div>
+                <div><a href="https://www.spotify.com/jp/legal/privacy-policy/#s3"><span>About Ads</span></a></div>
+                <div><a href="https://www.spotify.com/jp/accessibility/"><span>Accessibility</span></a></div>
+            </div>
+        </div>
+
+        <div class="right bg-grey rounded m-1 p-1">
+            <div class="header">
+                <div class="nav">
+                    <div class="back-forward">
+                        <button class="arrow-btn" id="backBtn"><img src="img/left-arrow.svg" alt="back"></button>
+                        <button class="arrow-btn" id="forwardBtn"><img src="img/right-arrow.svg" alt="forward"></button>
+                        <button id="themeToggleBtn" class="btn-sm" title="Toggle Light/Dark Theme">🌙</button>
+
+                    </div>
+                </div>
+
+                <div class="search-bar-container">
+                    <input type="text" id="searchInput" placeholder="Search for songs or artists...">
+                    <button id="searchButton" class="btn-search rounded">Search</button>
+                </div>
+
+                <div class="buttons">
+                    <button class="signup-btn">Sign up</button>
+                    <button class="login-btn">Log in</button>
+                </div>
+            </div>
+            
+            <div id="mainContentArea" class="main-content-area">
+
+                <div class="spotifySong" id="popularSongsSection"> <!-- Added ID here -->
+                    <h1>Popular Songs</h1>
+                    <div class="cardContainer">
+                        <div class="card" data-folder="Popular Songs/Ishq Hai">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Ishq Hai.jpg" alt="ishq hai">
+                            <h2>Ishq Hai</h2>
+                            <h4>Anurag Saikia</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Leja">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Leja.jpg" alt="Leja">
+                            <h2>Leja</h2>
+                            <h4>Lost Stories , JAI DHIR</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/O Rangrez">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="O Rangrez.jpg" alt="O Rangrez">
+                            <h2>O Rangrez</h2>
+                            <h4>Shankar-Ehsaan-Loy , Shreya Ghoshal</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Shaky">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Shaky.jpg" alt="shaky">
+                            <h2>Shaky</h2>
+                            <h4>Sanju Rathod</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Mera Naam Mary">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Mera Naam Mary.jpg" alt="Mera naam Mary">
+                            <h2>Mera Naam Mary</h2>
+                            <h4>Ajay Atul , Chinmayi</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Rang">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Rang .jpg" alt="Rang">
+                            <h2>Rang</h2>
+                            <h4>Tanishk Bagchi , Satinder Sartaaz</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Ranu Bombay Ki Ranu">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="RANU BOMBAI KI RANU.jpg" alt="Ranu">
+                            <h2>Ranu Bombai Ki Ranu</h2>
+                            <h4>Ramu Rathod , Prabha</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Sooseki">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Sooseki.jpg" alt="sooseki">
+                            <h2>Sooseki</h2>
+                            <h4>Shreya Ghoshal</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Kurchi Madathapetti">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Kurchi Madathapetti.jpg" alt="Kurchi">
+                            <h2>Kurchi Madathapetti</h2>
+                            <h4>Sahithi Chaganti,Sri Krishna</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Laal Peeli Akhiyan">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Laal Peeli Akhiyaan.jpg" alt="laal">
+                            <h2>Laal Peeli Akhiyaan</h2>
+                            <h4>Romy , Tanishk Bagchi</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Tauba Tauba">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Tauba Tauba.jpg" alt="Tauba">
+                            <h2>Tauba Tauba</h2>
+                            <h4>Karan Aujla</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Die With A Smile">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Die With A Smile.jpg" alt="die with a smile">
+                            <h2>Die With A Smile</h2>
+                            <h4>Lady Gaga,Bruno Mars</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Teri Baaton Mein Aisa Uljha Jiya">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Teri Baaton Mein Aisa Uljha Jiya.jpg" alt="Teri">
+                            <h2>Teri Baaton Mein Aisa Uljha Jiya</h2>
+                            <h4>Raghav , Tanishk Bagchi</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Banni">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Banni.jpg" alt="Banni">
+                            <h2>Banni</h2>
+                            <h4>Kapil Jangir , Komal Amrawat</h4>
+                        </div>
+
+                        <div class="card" data-folder="Popular Songs/Chaudhary">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Chaudhary.jpg" alt="Chaudhary">
+                            <h2>Chaudhary</h2>
+                            <h4>Mame Khan</h4>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="spotifyPlaylists" id="popularPlaylistsSection">
+                    <h1>Popular Playlists</h1>
+                    <div class="cardContainer">
+                        <div class="card" data-folder="ALL TIME HITS HINDI">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Songs album.jpg" alt="Songs Album">
+                            <h2>All Time Hits</h2>
+                            <p>From soul-stirring to foot-tapping: It's all here.</p>
+                        </div>
+
+                        <div class="card" data-folder="Telugu Hits">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Telugu Songs album.jpg" alt="Telugu Songs Album">
+                            <h2>Telugu Hits</h2>
+                            <p>Dive into Delight: The Ultimate Telugu Musical Journey.</p>
+                        </div>
+
+                        <div class="card" data-folder="OLD SONGS">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Old Songs ALBUM.jpg" alt="Old Songs Album">
+                            <h2>Old Songs</h2>
+                            <p>Timeless tunes,endless memories.</p>
+                        </div>
+
+                        <div class="card" data-folder="Bollywood Dance Music">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Bollywood Dance.jpg" alt="Bollywood Dance Songs Album">
+                            <h2>Bollywood Dance Music</h2>
+                            <p>Bollywood Beats:Get Ready to move!</p>
+                        </div>
+
+                        <div class="card" data-folder="Bollywood 2000s">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Bollywood 2000s.jpg" alt="Bollywood 2000s Songs Album">
+                            <h2>Bollywood 2000s</h2>
+                            <p>Your Passport to 2000s Bollywood Nostalgia.</p>
+                        </div>
+
+                        <div class="card" data-folder="Insta Hits">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Insta Hits.jpg" alt="Insta Hits Songs Album">
+                            <h2>Insta Hits</h2>
+                            <p>Your feed's favorite sounds, all in one place. Get ready to scroll and bop!</p>
+                        </div>
+
+                        <div class="card" data-folder="Latest Songs">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Latest Songs.jpg" alt="Latest Songs Album">
+                            <h2>Latest Songs</h2>
+                            <p>Fresh off the charts, straight to your speakers. Hear what's hot right now!</p>
+                        </div>
+
+                        <div class="card" data-folder="Bhakti Songs">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Bhakti Songs.jpg" alt="Bhakti Songs Album">
+                            <h2>Bhakti Songs</h2>
+                            <p>Find peace, feel the grace. Immerse yourself in divine melodies.</p>
+                        </div>
+
+                        <div class="card" data-folder="Cartoon">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Cartoon.jpg" alt="Cartoon Songs Album">
+                            <h2>Cartoon Songs </h2>
+                            <p>Sing along to your childhood! All the iconic cartoon hits in one place.</p>
+                        </div>
+
+                        <div class="card" data-folder="Patriotic Songs">
+                            <div class="play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="Patriotic.jpg" alt="Patriotic Album">
+                            <h2>Patriotic Songs </h2>
+                            <p>Salute the spirit. Songs that ignite patriotism and inspire the soul.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- Custom Playlists Section -->
+                <div id="userPlaylistsDisplaySection" class="spotifyPlaylists " style="display:grid;">
+                    <h1>Your Custom Playlists</h1>
+                    <div id="userPlaylistsContainer" class="user-playlists-section"></div>
+                </div>
+
+
+            </div> <!-- main content area -->
+
+
+            <div class="playbar">
+                <div class="seekbar">
+                    <div class="circle"></div>
+                </div>
+                <div class="visualizer">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+
+                <div class="abovebar">
+                    <div class="songinfo"></div>
+                    <div class="songbuttons">
+                        <img width="35" id="previous" src="img/prevsong.svg" alt="Previous Song">
+                        <img width="35" id="play" src="img/play.svg" alt="Play/Pause">
+                        <img width="35" id="next" src="img/nextsong.svg" alt="Next Song">
+                        <img id="likeSongBtn" class="like-button" src="img/heart.svg" alt="Like" />
+
+                    </div>
+                    <div class="timevol">
+                        <div class="songtime"></div>
+                        <div class="volume">
+                            <img width="25" src="img/volume.svg" alt="Volume Icon">
+                            <div class="range">
+                                <input type="range" name="volume" id="volumeControl" min="0" max="100" value="50">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- right tag -->
+    </div> <!-- container tag -->
+
+    <!-- Authentication Modal - Directly embedded for consistent loading -->
+    <div id="authModal" class="auth-modal">
+        <div class="modal-content">
+            <span id="closeAuthModalBtn" class="close-button">&times;</span>
+            <div class="auth-form">
+                <h2 id="authModalTitle">Login</h2>
+                <form id="authForm" autocomplete="off">
+                    <input type="text" id="usernameInput" placeholder="Username" autocomplete="off" required />
+                    <input type="password" id="passwordInput" placeholder="Password" autocomplete="off" required />
+                    <button type="submit" class="btn" id="authSubmitBtn">Login</button>
+                </form>
+                <div class="auth-message-display" id="authMessageDisplay"></div>
+                <p id="authToggleText">
+                    Don't have an account? <a href="#" id="switchToSignup">Signup</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Modal for Create Playlist and other dialogs -->
+    <div id="customModal" class="modal hidden">
+        <div class="modal-content">
+            <span id="closeModalBtn" class="close-button">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <div id="modalMessage"></div>
+            <div id="modalInputContainer" style="display:none;">
+                <input id="modalInput" type="text" placeholder="Enter playlist name..." />
+            </div>
+            <div id="modalButtons"></div>
+        </div>
+    </div>
+    <div id="customModalBackdrop" class="modal-backdrop hidden"></div>
+
+
+    <!-- Feature-specific JS files (IMPORTANT: Load these BEFORE main.js as main.js imports from them) -->
+    <script src="recentlyPlayed.js" type="module"></script>
+    <script src="likedSongs.js" type="module"></script>
+    <script src="playlistManager.js" type="module"></script>
+
+    <!-- Core application logic -->
+    <script src="main.js" type="module"></script>
+
+    <!-- Authentication logic (can be loaded after core app, as it doesn't have direct imports into main.js) -->
+
+    <script src="auth.js" type="module"></script>
+
+</body>
+
+>>>>>>> 42daecc (COMMIT ALL FILES TO GITHUB)
+</html>

@@ -1,0 +1,1569 @@
+<<<<<<< HEAD
+/* stylesheet.css */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'); /* Adding Inter for consistency */
+
+:root {
+    --a:0;
+    --playbar-height: 90px; /* Approximate height of the playbar, including its padding/margins */
+    --header-height: 80px; /* Approximate height of the header in the right panel */
+    --main-padding: 10px; /* Padding for the main container and sections */
+    --gap-spacing: 10px; /* Gap between elements */
+    --spotify-green: #1DB954;
+    --spotify-dark-grey: #121212;
+    --spotify-medium-grey: #181818;
+    --spotify-light-grey: #282828;
+    --text-light-grey: #b3b3b3;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif; /* Using Inter for overall consistency */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+body {
+    background-color: #000 ;
+    color: #fff;
+    display: flex; /* Ensure full viewport height */
+    min-height: 100vh;
+    overflow-y: auto; /* Allow vertical scrolling for the whole body */
+    padding-bottom: var(--playbar-height); /* Add space for the fixed playbar */
+}
+
+/* --- Container and Layout --- */
+.container {
+    width: 100%; /* Full viewport width */
+    height: calc(100vh - var(--playbar-height)); /* Calculate height to fill viewport above the fixed playbar */
+    gap: 10px; /* Space between left and right sections */
+    display: flex;
+    padding: var(--main-padding) var(--main-padding) 0 var(--main-padding); /* Adjusted padding: no bottom padding */
+    box-sizing: border-box;
+}
+
+.left {
+    width: 25vw;
+    padding: 10px;
+}
+
+.right {
+    width: 75vw;
+}
+
+
+/* --- Left Section (Sidebar) Components --- */
+.home, .library {
+    padding: 15px 20px; /* Increased padding for better spacing */
+    flex-shrink: 0; /* Prevent shrinking if content is large */
+}
+
+.home {
+    margin-bottom: 0; /* No margin between home and library for a continuous look */
+}
+
+.logo {
+    display: flex;
+    justify-content: center; /* Center the logo horizontally */
+    align-items: center;
+    padding: 10px 0 20px 0; /* Padding around the logo */
+    margin-bottom: 10px; /* Space between logo and nav items */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle separator */
+}
+
+.logo img {
+    width: 120px; /* Adjusted size for attractiveness */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Slight rounding for the logo image */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Soft shadow */
+    transition: transform 0.2s ease-in-out;
+}
+
+.logo img:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.home ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.home ul li {
+    display: flex;
+    align-items: center; /* Align icon and text vertically */
+    gap: 15px;
+    width: auto; /* Allow width to adjust to content */
+    padding: 12px 0; /* Padding for list items */
+    font-weight: 600; /* Bolder text */
+    color: #b3b3b3 ;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.home ul li:hover {
+    color: #fff; /* White on hover */
+}
+
+.home ul li.active {
+    color: white; /* Active item color */
+}
+
+.home ul li img {
+    width: 24px; /* Size of icons */
+    height: 24px;
+    transition: filter 0.2s ease;
+}
+
+.home ul li:hover img {
+    filter: invert(100%); /* Ensure icons stay white on hover for clarity */
+}
+
+.heading {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    padding: 15px 0; /* Adjusted padding */
+    font-weight: 700;
+    align-items: center;
+    font-size: 1em; /* Adjusted font size */
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle separator */
+}
+
+.heading img {
+    width: 28px; /* Slightly larger icon */
+    height: 28px;
+    filter: invert(70%); /* Make playlist icon slightly grey */
+}
+
+.footer {
+    display: flex;
+    flex-wrap: wrap; /* Allow links to wrap on smaller screens */
+    font-size: 0.7em; /* Smaller font for footer links */
+    color: #fff;
+    gap: 8px 15px; /* Row and column gap */
+    padding: 15px 0;
+    margin-top: auto; /* Push footer to the bottom of the left section */
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle separator */
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer a:hover {
+    color: #fff;
+}
+
+/* --- Right Section (Main Content) Components --- */
+.right {
+    flex-direction: column;
+    padding: 0; /* No padding on the right container itself, content handles it */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px; /* Padding inside the header */
+    background-color: #121212; /* Darker background for header */
+    border-radius: 8px 8px 0 0; /* Rounded top corners, sharp bottom */
+    position: sticky; /* Make header sticky */
+    top: 0;
+    z-index: 10; /* Ensure it stays above scrolling content */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    flex-wrap: wrap; /* Allow items to wrap */
+    gap: 10px; /* Space between header items */
+}
+
+.nav .back-forward {
+    display: flex;
+    gap: 10px;
+}
+
+.arrow-btn {
+    background-color: rgba(0, 0, 0, 0.7); /* Dark background for arrows */
+    border: none;
+    border-radius: 50%; /* Circular buttons */
+    width: 34px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.arrow-btn:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.arrow-btn img {
+    width: 18px;
+    filter: invert(100%); /* White arrows */
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.signup-btn, .login-btn {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.signup-btn {
+    background-color: transparent;
+    color: #b3b3b3;
+    font-size: 0.95em;
+}
+
+.signup-btn:hover {
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.login-btn {
+    background-color: #fff; /* White button */
+    color:#000; /* Black text */
+    font-size: 0.95em;
+}
+
+.login-btn:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+}
+
+/* Specific styling for the search bar and button */
+.search-bar-container {
+    display: flex; /* Arrange input and button side-by-side */
+    gap: 10px; /* Space between input and button */
+    flex-grow: 1; /* Allow it to take available space */
+    max-width: 400px; /* Limit max width for larger screens */
+}
+
+#searchInput {
+    flex-grow: 1; /* Allow input to fill available space */
+    padding: 10px 15px;
+    border: 1px solid #333; /* Darker border */
+    border-radius: 20px; /* Rounded corners */
+    background-color: #282828; /* Dark grey background */
+    color: white; /* White text */
+    font-size: 1em;
+    outline: none; /* Remove default focus outline */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#searchInput::placeholder {
+    color: #b3b3b3; /* Lighter placeholder text */
+}
+
+#searchInput:focus {
+    border-color: #1DB954; /* Spotify green border on focus */
+    box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.5); /* Green shadow on focus */
+}
+
+#searchButton.btn-search {
+    padding: 10px 20px;
+    background-color: #1DB954; /* Spotify green */
+    color: white;
+    border: none;
+    border-radius: 20px; /* Match input rounding */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#searchButton.btn-search:hover {
+    background-color: #1ed760;
+    transform: translateY(-1px); /* Slight lift effect */
+}
+
+.spotifySong {
+    padding: 25px; /* Padding for the main content area */
+}
+
+.spotifySong h1 {
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    color: #fff;
+}
+
+.spotifySong h1 {
+    padding: 16px;
+}
+
+.spotify-playlists {
+    padding: 25px; /* Padding for the main content area */
+}
+
+.spotifyPlaylists h1 {
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    color: #fff;
+}
+
+.spotifyPlaylists h1 {
+    padding: 16px;
+}
+
+.main-content-area {
+    flex-grow: 1; /* Take all remaining vertical space in 'right' */
+    overflow-y: auto; /* Enable scrolling for content within this area */
+    padding: var(--main-padding); /* Apply padding to the scrollable content area */
+    background-color: #121212; /* Ensure main content area has background */
+    border-radius: 8px; /* Match right container's radius */
+    box-sizing: border-box;
+}
+
+.cardContainer {
+    margin: 30px; /* This margin seems a bit large, considering right padding */
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    overflow-y: auto; /* Cards themselves might scroll, or the parent .main-content-area */
+    max-height: 60vh; /* Limit height if needed */
+}
+
+.card {
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--spotify-medium-grey); /* Consistent background */
+    position: relative;
+    transition: all .3s ease; /* Adjusted transition for smoother hover */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    color: inherit;
+}
+
+.card:hover{
+    background-color: var(--spotify-light-grey); /* Slightly darker on hover */
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    --a: 1;
+}
+
+.card>* {
+    padding-top: 10px;
+}
+
+.card img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card h2 {
+    font-size: 1.1em;
+    margin: 10px 0 5px;
+    color: white;
+    text-align: center;
+}
+
+.card h4 {
+    font-size: 1.0em;
+    margin: 10px 0 5px;
+    color: white;
+    text-align: center;
+}
+
+.card p {
+  text-align:center;
+  font-size: 0.75em;
+  margin: 0;
+  color: var(--text-light-grey, #b3b3b3);
+  white-space: normal;          /* Allow multiline */
+  overflow-wrap: break-word;    /* Break long words if needed */
+  word-break: break-word;
+  line-height: 1.3;
+  max-height: 4.5em;            /* Show up to 3 lines (1.5em x 3) */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 3px;
+  padding: 0 4px;
+}
+
+.play {
+    width: 50px;
+    height: 50px;
+    background-color: var(--spotify-green);
+    border-radius: 50%;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 80px; /* Adjusted to be higher on the card */
+    right: 15px;
+    opacity: var(--a, 0);
+    transition: all 1s ease-out;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.play svg {
+    filter: invert(1);
+}
+
+.buttons>* {
+    margin: 0 12px;
+}
+
+/* Library Section Card Enhancements */
+.library-content .create-playlist-card {
+  background: #181818;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 20px 18px 18px 18px;
+  margin-bottom: 18px;
+  transition: background 0.2s, box-shadow 0.2s;
+  border: 1px solid #232323;
+}
+
+.library-content .create-playlist-card:hover {
+  background: #232323;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.16);
+}
+
+/* Card Headings and Text */
+.library-content .create-playlist-card h3 {
+  font-size: 1.11em;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.library-content .create-playlist-card p {
+  font-size: 0.92em;
+  color: #b3b3b3;
+  margin-bottom: 16px;
+}
+
+/* Enhanced Playlist Buttons */
+.btn-create-playlist {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #282828;
+  color: #fff;
+  border: none;
+  border-radius: 22px;
+  padding: 9px 20px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.12s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+  margin-right: 8px;
+}
+
+.btn-create-playlist:hover, .btn-create-playlist:focus {
+  background: #1DB954;
+  color: #fff;
+  transform: translateY(-2px) scale(1.03);
+  outline: none;
+}
+
+.btn-create-playlist img {
+  width: 20px;
+  height: 20px;
+  filter: invert(1);
+  margin-right: 5px;
+}
+
+/* Make Liked/Recent buttons green on hover for consistency */
+#createPlaylistBtn:hover,
+#viewLikedBtn:hover,
+#viewRecentBtn:hover,
+#viewPlaylistsBtn:hover {
+  background: #1DB954;
+  color: #fff;
+}
+
+/* Library Content Cards (left sidebar) */
+.library-content .create-playlist-card {
+    flex-shrink: 0; /* Prevent these cards from shrinking */
+    margin-top: 10px; /* Space between cards */
+    margin-bottom: 10px;
+    background-color: #1a1a1a; /* Ensure it has a background */
+    border-radius: 8px; /* Consistent border radius */
+    padding: 15px; /* Add some padding */
+}
+
+.library-content .create-playlist-card .btn-create-playlist img {
+    filter: invert(1); /* Ensure icons are visible */
+}
+
+.library-content .create-playlist-card h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.library-content .create-playlist-card p {
+    margin-bottom: 15px;
+    font-size: 0.85em;
+    color: #b3b3b3;
+}
+
+/* This is the container for the actual playlist cards */
+/* It will now act as the grid container for your custom playlists */
+.user-playlists-section { /* This is the #userPlaylistsContainer div's class */
+    display: grid;
+    /* Adjusted minmax to make cards smaller (e.g., min 140px width) */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+    gap: 15px; /* Reduced space between cards */
+    padding-bottom: 20px; /* Padding at the bottom of the grid */
+
+    /* ADDED: Max height and scrollbar for the custom playlist grid */
+    max-height: 400px; /* Adjust this value as needed. Makes the container scrollable. */
+    overflow-y: auto; /* Adds a vertical scrollbar when content exceeds max-height */
+    padding-right: 10px; /* Add some padding on the right to make space for the scrollbar */
+}
+
+.user-playlists-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 22px;
+  padding-bottom: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+#userPlaylistsDisplaySection h1 {
+    color: #fff;
+    margin-bottom: 25px;
+    font-size: 2em;
+}
+
+.user-playlist-card.active {
+  box-shadow: 0 0 0 3px #1DB954;
+}
+
+/* Styles for each individual user playlist card */
+
+.user-playlist-card {
+  background: #181818;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+  padding: 22px 18px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  transition: background 0.2s, transform 0.18s, box-shadow 0.18s;
+  cursor: pointer;
+  min-width: 160px;
+  max-width: 180px;
+  margin: 0 auto;
+}
+
+.user-playlist-card:hover {
+  background: #232323;
+  transform: translateY(-7px) scale(1.04);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.34);
+}
+
+.user-playlist-card .playlist-image-placeholder {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, #a259f7 60%, #fc5c7d 100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(162,89,247,0.10);
+}
+
+.user-playlist-card .playlist-image-placeholder img,
+.user-playlist-card .playlist-image-placeholder svg {
+  width: 40px;
+  height: 40px;
+  display: block;
+  margin: auto;
+  filter: none;
+  opacity: 1;
+}
+
+
+.user-playlist-card h3 {
+  margin: 0;
+  font-size: 1.08em;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.user-playlist-card p {
+  margin: 0;
+  font-size: 0.92em;
+  color: #b3b3b3;
+  font-weight: 500;
+}
+
+.user-playlist-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn-sm {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 22px;
+  font-size: 0.93em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, transform 0.11s;
+  background: #282828;
+  color: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+}
+
+.btn-sm:hover {
+  background: #1DB954;
+  color: #fff;
+  transform: translateY(-2px) scale(1.03);
+}
+
+.btn-delete-playlist {
+  background: #dc3545;
+  color: #fff;
+}
+
+.btn-delete-playlist:hover {
+  background: #b91c1c;
+}
+
+.btn-add-song-to-playlist {
+  background: #1DB954;
+  color: #fff;
+}
+
+.btn-add-song-to-playlist:hover {
+  background: #1ed760;
+}
+
+/* Styles for songs listed *within* a playlist card (when 'View' is clicked) - REMOVED FOR NEW BEHAVIOR */
+/* The user requested that songs only appear in the left sidebar, not duplicated in the card. */
+.user-playlist-songs-list {
+    display: none !important; /* Force hide this section */
+}
+
+
+/* General styles for song lists (Liked, Recently Played, and main song list) */
+/* The song-items-container in index.html is now the primary song list UL */
+.song-items-container ul { /* Targeting the UL inside the song-items-container */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.song-items-container li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    border: 1px solid #282828; /* Changed from border-bottom to full border */
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+    border-radius: 4px;
+    margin-bottom: 5px; /* Space between list items */
+}
+/* Removed .song-items-container li:last-child { border-bottom: none; } */
+
+.song-items-container li:hover {
+    background-color: rgba(40, 40, 40, 0.5);
+}
+.song-items-container .info {
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 10px;
+}
+.song-items-container .info div:first-child {
+    font-weight: bold;
+    color: white;
+}
+.song-items-container .info div:last-child {
+    color: #b3b3b3;
+    font-size: 0.8rem;
+}
+.song-items-container .playnow {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Increased gap slightly */
+    transition: opacity 0.2s ease;
+    flex-shrink: 0;
+    opacity: 1; 
+}
+.song-items-container li:hover .playnow {
+    opacity: 1;
+}
+.song-items-container .playnow img {
+    width: 24px; /* Slightly larger play icon */
+    height: 24px;
+    background-color: #1DB954;
+    border-radius: 50%;
+    padding: 6px; /* Adjusted padding */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Heart icon in song list items */
+.song-list-heart-icon {
+    cursor: pointer;
+    width: 20px; /* Size of the heart icon */
+    height: 20px;
+    filter: invert(1); /* Default to white */
+    transition: filter 0.2s ease, transform 0.2s ease;
+    margin-left: 5px; /* Space between play button and heart */
+}
+
+.song-list-heart-icon.liked {
+    filter: invert(32%) sepia(90%) saturate(7489%) hue-rotate(345deg) brightness(97%) contrast(100%); /* Red color */
+}
+
+.song-list-heart-icon:hover {
+    transform: scale(1.1);
+}
+
+
+.text-center-placeholder {
+    text-align: center;
+    color: #b3b3b3;
+    padding: 20px;
+    font-style: italic;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+}
+
+
+/* Heart icon in playbar */
+.like-button {
+    cursor: pointer;
+    margin-left: 15px; /* Space from other buttons */
+    filter: invert(1); /* Default to white */
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.like-button.liked {
+    /* Bright red for liked state - using a filter for SVG color change */
+    filter: red;
+}
+
+.like-button:hover {
+    transform: scale(1.1);
+}
+
+
+=======
+/* stylesheet.css */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'); /* Adding Inter for consistency */
+
+:root {
+    --a:0;
+    --playbar-height: 90px; /* Approximate height of the playbar, including its padding/margins */
+    --header-height: 80px; /* Approximate height of the header in the right panel */
+    --main-padding: 10px; /* Padding for the main container and sections */
+    --gap-spacing: 10px; /* Gap between elements */
+    --spotify-green: #1DB954;
+    --spotify-dark-grey: #121212;
+    --spotify-medium-grey: #181818;
+    --spotify-light-grey: #282828;
+    --text-light-grey: #b3b3b3;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif; /* Using Inter for overall consistency */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+body {
+    background-color: #000 ;
+    color: #fff;
+    display: flex; /* Ensure full viewport height */
+    min-height: 100vh;
+    overflow-y: auto; /* Allow vertical scrolling for the whole body */
+    padding-bottom: var(--playbar-height); /* Add space for the fixed playbar */
+}
+
+/* --- Container and Layout --- */
+.container {
+    width: 100%; /* Full viewport width */
+    height: calc(100vh - var(--playbar-height)); /* Calculate height to fill viewport above the fixed playbar */
+    gap: 10px; /* Space between left and right sections */
+    display: flex;
+    padding: var(--main-padding) var(--main-padding) 0 var(--main-padding); /* Adjusted padding: no bottom padding */
+    box-sizing: border-box;
+}
+
+.left {
+    width: 25vw;
+    padding: 10px;
+}
+
+.right {
+    width: 75vw;
+}
+
+
+/* --- Left Section (Sidebar) Components --- */
+.home, .library {
+    padding: 15px 20px; /* Increased padding for better spacing */
+    flex-shrink: 0; /* Prevent shrinking if content is large */
+}
+
+.home {
+    margin-bottom: 0; /* No margin between home and library for a continuous look */
+}
+
+.logo {
+    display: flex;
+    justify-content: center; /* Center the logo horizontally */
+    align-items: center;
+    padding: 10px 0 20px 0; /* Padding around the logo */
+    margin-bottom: 10px; /* Space between logo and nav items */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle separator */
+}
+
+.logo img {
+    width: 120px; /* Adjusted size for attractiveness */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Slight rounding for the logo image */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Soft shadow */
+    transition: transform 0.2s ease-in-out;
+}
+
+.logo img:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.home ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.home ul li {
+    display: flex;
+    align-items: center; /* Align icon and text vertically */
+    gap: 15px;
+    width: auto; /* Allow width to adjust to content */
+    padding: 12px 0; /* Padding for list items */
+    font-weight: 600; /* Bolder text */
+    color: #b3b3b3 ;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.home ul li:hover {
+    color: #fff; /* White on hover */
+}
+
+.home ul li.active {
+    color: white; /* Active item color */
+}
+
+.home ul li img {
+    width: 24px; /* Size of icons */
+    height: 24px;
+    transition: filter 0.2s ease;
+}
+
+.home ul li:hover img {
+    filter: invert(100%); /* Ensure icons stay white on hover for clarity */
+}
+
+.heading {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    padding: 15px 0; /* Adjusted padding */
+    font-weight: 700;
+    align-items: center;
+    font-size: 1em; /* Adjusted font size */
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle separator */
+}
+
+.heading img {
+    width: 28px; /* Slightly larger icon */
+    height: 28px;
+    filter: invert(70%); /* Make playlist icon slightly grey */
+}
+
+.footer {
+    display: flex;
+    flex-wrap: wrap; /* Allow links to wrap on smaller screens */
+    font-size: 0.7em; /* Smaller font for footer links */
+    color: #fff;
+    gap: 8px 15px; /* Row and column gap */
+    padding: 15px 0;
+    margin-top: auto; /* Push footer to the bottom of the left section */
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle separator */
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer a:hover {
+    color: #fff;
+}
+
+/* --- Right Section (Main Content) Components --- */
+.right {
+    flex-direction: column;
+    padding: 0; /* No padding on the right container itself, content handles it */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px; /* Padding inside the header */
+    background-color: #121212; /* Darker background for header */
+    border-radius: 8px 8px 0 0; /* Rounded top corners, sharp bottom */
+    position: sticky; /* Make header sticky */
+    top: 0;
+    z-index: 10; /* Ensure it stays above scrolling content */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    flex-wrap: wrap; /* Allow items to wrap */
+    gap: 10px; /* Space between header items */
+}
+
+.nav .back-forward {
+    display: flex;
+    gap: 10px;
+}
+
+.arrow-btn {
+    background-color: rgba(0, 0, 0, 0.7); /* Dark background for arrows */
+    border: none;
+    border-radius: 50%; /* Circular buttons */
+    width: 34px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.arrow-btn:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.arrow-btn img {
+    width: 18px;
+    filter: invert(100%); /* White arrows */
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.signup-btn, .login-btn {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.signup-btn {
+    background-color: transparent;
+    color: #b3b3b3;
+    font-size: 0.95em;
+}
+
+.signup-btn:hover {
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.login-btn {
+    background-color: #fff; /* White button */
+    color:#000; /* Black text */
+    font-size: 0.95em;
+}
+
+.login-btn:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+}
+
+/* Specific styling for the search bar and button */
+.search-bar-container {
+    display: flex; /* Arrange input and button side-by-side */
+    gap: 10px; /* Space between input and button */
+    flex-grow: 1; /* Allow it to take available space */
+    max-width: 400px; /* Limit max width for larger screens */
+}
+
+#searchInput {
+    flex-grow: 1; /* Allow input to fill available space */
+    padding: 10px 15px;
+    border: 1px solid #333; /* Darker border */
+    border-radius: 20px; /* Rounded corners */
+    background-color: #282828; /* Dark grey background */
+    color: white; /* White text */
+    font-size: 1em;
+    outline: none; /* Remove default focus outline */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#searchInput::placeholder {
+    color: #b3b3b3; /* Lighter placeholder text */
+}
+
+#searchInput:focus {
+    border-color: #1DB954; /* Spotify green border on focus */
+    box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.5); /* Green shadow on focus */
+}
+
+#searchButton.btn-search {
+    padding: 10px 20px;
+    background-color: #1DB954; /* Spotify green */
+    color: white;
+    border: none;
+    border-radius: 20px; /* Match input rounding */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#searchButton.btn-search:hover {
+    background-color: #1ed760;
+    transform: translateY(-1px); /* Slight lift effect */
+}
+
+.spotifySong {
+    padding: 25px; /* Padding for the main content area */
+}
+
+.spotifySong h1 {
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    color: #fff;
+}
+
+.spotifySong h1 {
+    padding: 16px;
+}
+
+.spotify-playlists {
+    padding: 25px; /* Padding for the main content area */
+}
+
+.spotifyPlaylists h1 {
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    color: #fff;
+}
+
+.spotifyPlaylists h1 {
+    padding: 16px;
+}
+
+.main-content-area {
+    flex-grow: 1; /* Take all remaining vertical space in 'right' */
+    overflow-y: auto; /* Enable scrolling for content within this area */
+    padding: var(--main-padding); /* Apply padding to the scrollable content area */
+    background-color: #121212; /* Ensure main content area has background */
+    border-radius: 8px; /* Match right container's radius */
+    box-sizing: border-box;
+}
+
+.cardContainer {
+    margin: 30px; /* This margin seems a bit large, considering right padding */
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    overflow-y: auto; /* Cards themselves might scroll, or the parent .main-content-area */
+    max-height: 60vh; /* Limit height if needed */
+}
+
+.card {
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--spotify-medium-grey); /* Consistent background */
+    position: relative;
+    transition: all .3s ease; /* Adjusted transition for smoother hover */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    color: inherit;
+}
+
+.card:hover{
+    background-color: var(--spotify-light-grey); /* Slightly darker on hover */
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    --a: 1;
+}
+
+.card>* {
+    padding-top: 10px;
+}
+
+.card img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card h2 {
+    font-size: 1.1em;
+    margin: 10px 0 5px;
+    color: white;
+    text-align: center;
+}
+
+.card h4 {
+    font-size: 1.0em;
+    margin: 10px 0 5px;
+    color: white;
+    text-align: center;
+}
+
+.card p {
+  text-align:center;
+  font-size: 0.75em;
+  margin: 0;
+  color: var(--text-light-grey, #b3b3b3);
+  white-space: normal;          /* Allow multiline */
+  overflow-wrap: break-word;    /* Break long words if needed */
+  word-break: break-word;
+  line-height: 1.3;
+  max-height: 4.5em;            /* Show up to 3 lines (1.5em x 3) */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 3px;
+  padding: 0 4px;
+}
+
+.play {
+    width: 50px;
+    height: 50px;
+    background-color: var(--spotify-green);
+    border-radius: 50%;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 80px; /* Adjusted to be higher on the card */
+    right: 15px;
+    opacity: var(--a, 0);
+    transition: all 1s ease-out;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.play svg {
+    filter: invert(1);
+}
+
+.buttons>* {
+    margin: 0 12px;
+}
+
+/* Library Section Card Enhancements */
+.library-content .create-playlist-card {
+  background: #181818;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 20px 18px 18px 18px;
+  margin-bottom: 18px;
+  transition: background 0.2s, box-shadow 0.2s;
+  border: 1px solid #232323;
+}
+
+.library-content .create-playlist-card:hover {
+  background: #232323;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.16);
+}
+
+/* Card Headings and Text */
+.library-content .create-playlist-card h3 {
+  font-size: 1.11em;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.library-content .create-playlist-card p {
+  font-size: 0.92em;
+  color: #b3b3b3;
+  margin-bottom: 16px;
+}
+
+/* Enhanced Playlist Buttons */
+.btn-create-playlist {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #282828;
+  color: #fff;
+  border: none;
+  border-radius: 22px;
+  padding: 9px 20px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.12s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+  margin-right: 8px;
+}
+
+.btn-create-playlist:hover, .btn-create-playlist:focus {
+  background: #1DB954;
+  color: #fff;
+  transform: translateY(-2px) scale(1.03);
+  outline: none;
+}
+
+.btn-create-playlist img {
+  width: 20px;
+  height: 20px;
+  filter: invert(1);
+  margin-right: 5px;
+}
+
+/* Make Liked/Recent buttons green on hover for consistency */
+#createPlaylistBtn:hover,
+#viewLikedBtn:hover,
+#viewRecentBtn:hover,
+#viewPlaylistsBtn:hover {
+  background: #1DB954;
+  color: #fff;
+}
+
+/* Library Content Cards (left sidebar) */
+.library-content .create-playlist-card {
+    flex-shrink: 0; /* Prevent these cards from shrinking */
+    margin-top: 10px; /* Space between cards */
+    margin-bottom: 10px;
+    background-color: #1a1a1a; /* Ensure it has a background */
+    border-radius: 8px; /* Consistent border radius */
+    padding: 15px; /* Add some padding */
+}
+
+.library-content .create-playlist-card .btn-create-playlist img {
+    filter: invert(1); /* Ensure icons are visible */
+}
+
+.library-content .create-playlist-card h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.library-content .create-playlist-card p {
+    margin-bottom: 15px;
+    font-size: 0.85em;
+    color: #b3b3b3;
+}
+
+/* This is the container for the actual playlist cards */
+/* It will now act as the grid container for your custom playlists */
+.user-playlists-section { /* This is the #userPlaylistsContainer div's class */
+    display: grid;
+    /* Adjusted minmax to make cards smaller (e.g., min 140px width) */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+    gap: 15px; /* Reduced space between cards */
+    padding-bottom: 20px; /* Padding at the bottom of the grid */
+
+    /* ADDED: Max height and scrollbar for the custom playlist grid */
+    max-height: 400px; /* Adjust this value as needed. Makes the container scrollable. */
+    overflow-y: auto; /* Adds a vertical scrollbar when content exceeds max-height */
+    padding-right: 10px; /* Add some padding on the right to make space for the scrollbar */
+}
+
+.user-playlists-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 22px;
+  padding-bottom: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+#userPlaylistsDisplaySection h1 {
+    color: #fff;
+    margin-bottom: 25px;
+    font-size: 2em;
+}
+
+.user-playlist-card.active {
+  box-shadow: 0 0 0 3px #1DB954;
+}
+
+/* Styles for each individual user playlist card */
+
+.user-playlist-card {
+  background: #181818;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+  padding: 22px 18px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  transition: background 0.2s, transform 0.18s, box-shadow 0.18s;
+  cursor: pointer;
+  min-width: 160px;
+  max-width: 180px;
+  margin: 0 auto;
+}
+
+.user-playlist-card:hover {
+  background: #232323;
+  transform: translateY(-7px) scale(1.04);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.34);
+}
+
+.user-playlist-card .playlist-image-placeholder {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, #a259f7 60%, #fc5c7d 100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(162,89,247,0.10);
+}
+
+.user-playlist-card .playlist-image-placeholder img,
+.user-playlist-card .playlist-image-placeholder svg {
+  width: 40px;
+  height: 40px;
+  display: block;
+  margin: auto;
+  filter: none;
+  opacity: 1;
+}
+
+
+.user-playlist-card h3 {
+  margin: 0;
+  font-size: 1.08em;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.user-playlist-card p {
+  margin: 0;
+  font-size: 0.92em;
+  color: #b3b3b3;
+  font-weight: 500;
+}
+
+.user-playlist-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn-sm {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 22px;
+  font-size: 0.93em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, transform 0.11s;
+  background: #282828;
+  color: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+}
+
+.btn-sm:hover {
+  background: #1DB954;
+  color: #fff;
+  transform: translateY(-2px) scale(1.03);
+}
+
+.btn-delete-playlist {
+  background: #dc3545;
+  color: #fff;
+}
+
+.btn-delete-playlist:hover {
+  background: #b91c1c;
+}
+
+.btn-add-song-to-playlist {
+  background: #1DB954;
+  color: #fff;
+}
+
+.btn-add-song-to-playlist:hover {
+  background: #1ed760;
+}
+
+/* Styles for songs listed *within* a playlist card (when 'View' is clicked) - REMOVED FOR NEW BEHAVIOR */
+/* The user requested that songs only appear in the left sidebar, not duplicated in the card. */
+.user-playlist-songs-list {
+    display: none !important; /* Force hide this section */
+}
+
+
+/* General styles for song lists (Liked, Recently Played, and main song list) */
+/* The song-items-container in index.html is now the primary song list UL */
+.song-items-container ul { /* Targeting the UL inside the song-items-container */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.song-items-container li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    border: 1px solid #282828; /* Changed from border-bottom to full border */
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+    border-radius: 4px;
+    margin-bottom: 5px; /* Space between list items */
+}
+/* Removed .song-items-container li:last-child { border-bottom: none; } */
+
+.song-items-container li:hover {
+    background-color: rgba(40, 40, 40, 0.5);
+}
+.song-items-container .info {
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 10px;
+}
+.song-items-container .info div:first-child {
+    font-weight: bold;
+    color: white;
+}
+.song-items-container .info div:last-child {
+    color: #b3b3b3;
+    font-size: 0.8rem;
+}
+.song-items-container .playnow {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Increased gap slightly */
+    transition: opacity 0.2s ease;
+    flex-shrink: 0;
+    opacity: 1; 
+}
+.song-items-container li:hover .playnow {
+    opacity: 1;
+}
+.song-items-container .playnow img {
+    width: 24px; /* Slightly larger play icon */
+    height: 24px;
+    background-color: #1DB954;
+    border-radius: 50%;
+    padding: 6px; /* Adjusted padding */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Heart icon in song list items */
+.song-list-heart-icon {
+    cursor: pointer;
+    width: 20px; /* Size of the heart icon */
+    height: 20px;
+    filter: invert(1); /* Default to white */
+    transition: filter 0.2s ease, transform 0.2s ease;
+    margin-left: 5px; /* Space between play button and heart */
+}
+
+.song-list-heart-icon.liked {
+    filter: invert(32%) sepia(90%) saturate(7489%) hue-rotate(345deg) brightness(97%) contrast(100%); /* Red color */
+}
+
+.song-list-heart-icon:hover {
+    transform: scale(1.1);
+}
+
+
+.text-center-placeholder {
+    text-align: center;
+    color: #b3b3b3;
+    padding: 20px;
+    font-style: italic;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+}
+
+
+/* Heart icon in playbar */
+.like-button {
+    cursor: pointer;
+    margin-left: 15px; /* Space from other buttons */
+    filter: invert(1); /* Default to white */
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.like-button.liked {
+    /* Bright red for liked state - using a filter for SVG color change */
+    filter: red;
+}
+
+.like-button:hover {
+    transform: scale(1.1);
+}
+
+
+>>>>>>> 42daecc (COMMIT ALL FILES TO GITHUB)
